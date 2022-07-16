@@ -7,7 +7,7 @@ def dollar_rate():
     tree = ET.fromstring(response.content)
     dollar = tree.find('.//Valute[@ID="R01235"]').find('Value').text
     dollar = dollar.replace(',', '.')
-    return print(float(dollar))
+    return float(dollar)
 
 
 dollar_rate()
