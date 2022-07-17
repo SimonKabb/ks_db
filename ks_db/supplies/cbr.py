@@ -10,4 +10,5 @@ def dollar_rate():
     return float(dollar)
 
 
-dollar_rate()
+if __name__ == '__main__':
+    print(dollar_rate())

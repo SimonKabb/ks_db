@@ -1,7 +1,9 @@
 import httplib2
 from apiclient import discovery
 from oauth2client.service_account import ServiceAccountCredentials
-
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CREDENTIALS_FILE = os.path.join(BASE_DIR, 'cred.json')
 
 CREDENTIALS_FILE = 'cred.json'
 spreadsheet_id = '1gmOeYU2Z-UL5RAfBxNgaecCfjMdM9bvLi5knCqVqNjs'
@@ -21,11 +23,8 @@ def read_table(spreadsheet_id, CREDENTIALS_FILE):
         range='Лист1',
         majorDimension='ROWS').execute()
     values = sheet['values']
-    print(values)
-    for value in values:
-        print(value)  # это у нас список со значениями
     return values
 
 
 if __name__ == '__main__':
-    read_table(spreadsheet_id)
+    print(read_table(spreadsheet_id, CREDENTIALS_FILE))
