@@ -1,6 +1,6 @@
 import psycopg2
-from shets import read_table
-from cbr import dollar_rate
+from ks_db.supplies.shets import read_table
+from ks_db.supplies.cbr import dollar_rate
 from datetime import datetime
 CREDENTIALS_FILE = 'creds.json'
 spreadsheet_id = '1gmOeYU2Z-UL5RAfBxNgaecCfjMdM9bvLi5knCqVqNjs'
@@ -57,6 +57,7 @@ def prnt_data():
     print("Результат", record)
 
 
+#####
 if connection:
     cursor.close()
     connection.close()
