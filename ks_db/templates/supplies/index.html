@@ -1,0 +1,17 @@
+<!DOCTYPE html> 
+<html lang="ru">
+<body>
+  <table border="1">
+   <caption>Заказы</caption>
+   <tr>
+    <th>id</th>
+    <th>заказ №</th>
+    <th>стоимость, $</th>
+    <th>стоимость, руб</th>
+    <th>срок поставки</th>
+   </tr>
+   {% for order in orders %}
+   <tr><td>{{ order.id }}</td><td>{{ order.ord }}</td><td>{{ order.price }}</td><td>{{ order.rub  }}</td><td>{{ order.delivery_time  }}</td></tr>
+   {% endfor %}
+  </table>
+</body> 
