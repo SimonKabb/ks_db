@@ -1,10 +1,14 @@
-from django.shortcuts import render
+import os
+from datetime import datetime
+
+from django.shortcuts import get_object_or_404, redirect, render
+
 from .models import Ks_db
+
 from .cbr import dollar_rate
 from .shets import read_table
-from datetime import datetime
-from django.shortcuts import get_object_or_404, redirect, render
-import os
+from .telegr import send_telegram
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CREDENTIALS_FILE = os.path.join(BASE_DIR, 'cred.json')
 
@@ -37,4 +41,10 @@ def refresh_db(request):
                                        price=data[2],
                                        rub=int(data[2])*dollar_cource,
                                        delivery_time=date)
+    current_date = datetime.now()
+    late_orders = Ks_db.objects.filter(delivery_time__lte=current_date)
+    list_orders = ''
+    for late_order in late_orders:
+        list_orders = list_orders + str(late_order.ord) + ', '
+    send_telegram(list_orders)
     return redirect('supplies:index')
